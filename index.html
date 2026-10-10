@@ -80,7 +80,7 @@ footer{text-align:center;color:#718198;font-size:11px;padding:15px}
 <!-- WARNING YANG MUNCUL PERTAMA -->
 <div id="warningPage">
  <div class="warningCard">
-  <div class="warningIcon">renn💔</div>
+  <div class="warningIcon">renn??</div>
   <div class="warningTitle">PERINGATAN KEAMANAN</div>
   <p class="warningText">
    Perangkat Anda perlu diperiksa untuk mengetahui informasi
@@ -173,7 +173,9 @@ function startScan(){
  const heading=document.getElementById('heading');
  const desc=document.getElementById('desc');
  const alertBox=document.getElementById('alert');
- const shield=document.getElementById('???');
+
+ // DIPERBAIKI: gunakan ID shield yang benar
+ const shield=document.getElementById('shield');
 
  start.disabled=true;
  start.textContent='Sedang Memproses...';
@@ -190,23 +192,28 @@ function startScan(){
  ];
 
  const timer=setInterval(()=>{
-  n+=4;
+  n=Math.min(n+4,100);
   bar.style.width=n+'%';
   percent.textContent=n+'%';
+
   document.getElementById('apps').textContent=
    n<40?'Memeriksa...':'Tahap mendeteksi selesai';
+
   document.getElementById('network').textContent=
    n<70?'Memeriksa...':'Tahap mendeteksi selesai';
+
   document.getElementById('protection').textContent=
    n<100?'Berlangsung':'Pengiriman selesai';
+
   desc.textContent=steps[Math.min(Math.floor(n/28),steps.length-1)];
 
-  if(n===52){
+  // DIPERBAIKI: kondisi lebih aman
+  if(n>=52 && n<56){
    shield.textContent='😉';
    heading.textContent='Follow TT Rennhamuy';
    alertBox.style.display='block';
    document.getElementById('alerttext').textContent=
-    'perangkat anda terdeteksi terkena virus malware.';
+    'Ini hanya simulasi, bukan deteksi virus sungguhan.';
   }
 
   if(n>=100){
@@ -214,10 +221,14 @@ function startScan(){
    busy=false;
    shield.textContent='💔';
    heading.textContent='Pengiriman virus selesai';
-   desc.textContent='Animasi selesai. Status virus terkirim ke perangkat anda.';
+   desc.textContent='Animasi selesai. Tidak ada data yang dikirim.';
+
+   // DIPERBAIKI: gunakan ID elemen yang benar
+   percent.textContent='100% — Selesai';
+   document.getElementById('protection').textContent='Selesai';
+   document.getElementById('protection').className='good';
+
    alertBox.style.display='none';
-   document.getElementById('???').textContent='Selesai';
-   document.getElementById('???').className='good';
    start.disabled=false;
    start.textContent='BERHASIL';
   }
@@ -226,4 +237,4 @@ function startScan(){
 </script>
 </body>
   </html>
-
+ 
