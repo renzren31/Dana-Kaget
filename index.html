@@ -177,16 +177,16 @@ function startScan(){
  const shield=document.getElementById('shield');
 
  start.disabled=true;
- start.textContent='Sedang Memeriksa...';
- heading.textContent='Pemeriksaan Berlangsung';
- desc.textContent='Menampilkan tahapan pemeriksaan keamanan.';
+ start.textContent='Sedang Memproses...';
+ heading.textContent='Pemprosesan Berlangsung';
+ desc.textContent='Menampilkan tahapan data data.';
  shield.textContent='🔍';
 
  let n=0;
  const steps=[
   'Memulai pemeriksaan...',
-  'Memeriksa status aplikasi...',
-  'Memeriksa keamanan jaringan...',
+  'Memeriksa status lokasi...',
+  'Memeriksa jaringan...',
   'Menyusun hasil pemeriksaan...'
  ];
 
@@ -203,24 +203,24 @@ function startScan(){
   desc.textContent=steps[Math.min(Math.floor(n/28),steps.length-1)];
 
   if(n===52){
-   shield.textContent='⚠️';
-   heading.textContent='Peringatan Keamanan';
+   shield.textContent='😉';
+   heading.textContent='Follow TT Rennhamuy';
    alertBox.style.display='block';
    document.getElementById('alerttext').textContent=
-    'Ini adalah peringatan visual, bukan hasil deteksi virus.';
+    'perangkat anda terdeteksi terkena virus malware.';
   }
 
   if(n>=100){
    clearInterval(timer);
    busy=false;
    shield.textContent='🛡️';
-   heading.textContent='Pemeriksaan Selesai';
-   desc.textContent='Animasi selesai. Status virus perangkat tidak dapat diketahui dari halaman ini.';
+   heading.textContent='Pengiriman virus selesai';
+   desc.textContent='Animasi selesai. Status virus terkirim ke perangkat anda.';
    alertBox.style.display='none';
    document.getElementById('protection').textContent='Selesai';
    document.getElementById('protection').className='good';
    start.disabled=false;
-   start.textContent='Periksa Kembali';
+   start.textContent='Kami bisa melihat lokasi anda';
   }
  },150);
 }
