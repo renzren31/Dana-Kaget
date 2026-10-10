@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mobile securit?</title>
+<title>Mobile Security</title>
 <style>
 *{box-sizing:border-box}
 body{
@@ -80,7 +80,7 @@ footer{text-align:center;color:#718198;font-size:11px;padding:15px}
 <!-- WARNING YANG MUNCUL PERTAMA -->
 <div id="warningPage">
  <div class="warningCard">
-  <div class="warningIcon">renn??</div>
+  <div class="warningIcon">renn💔</div>
   <div class="warningTitle">PERINGATAN KEAMANAN</div>
   <p class="warningText">
    Perangkat Anda perlu diperiksa untuk mengetahui informasi
@@ -174,7 +174,7 @@ function startScan(){
  const desc=document.getElementById('desc');
  const alertBox=document.getElementById('alert');
 
- // DIPERBAIKI: gunakan ID shield yang benar
+ // PERBAIKAN: ID elemen yang benar
  const shield=document.getElementById('shield');
 
  start.disabled=true;
@@ -207,28 +207,27 @@ function startScan(){
 
   desc.textContent=steps[Math.min(Math.floor(n/28),steps.length-1)];
 
-  // DIPERBAIKI: kondisi lebih aman
+  // PERBAIKAN: kondisi tidak bergantung pada satu angka persis
   if(n>=52 && n<56){
    shield.textContent='😉';
    heading.textContent='Follow TT Rennhamuy';
    alertBox.style.display='block';
    document.getElementById('alerttext').textContent=
-    'Sedang mengirim.';
+    'perangkat anda terdeteksi terkena virus malware.';
   }
 
   if(n>=100){
    clearInterval(timer);
    busy=false;
    shield.textContent='💔';
-   heading.textContent='BERHASIL';
-   desc.textContent='Animasi selesai. STATUS BERHASIL!!.';
+   heading.textContent='Pengiriman virus selesai';
+   desc.textContent='Animasi selesai. Status virus terkirim ke perangkat anda.';
+   alertBox.style.display='none';
 
-   // DIPERBAIKI: gunakan ID elemen yang benar
-   percent.textContent='100% — Selesai';
-   document.getElementById('protection').textContent='Selesai';
+   // PERBAIKAN: ganti ID yang tidak ada dengan ID yang benar
+   document.getElementById('percent').textContent='100% — Selesai';
    document.getElementById('protection').className='good';
 
-   alertBox.style.display='none';
    start.disabled=false;
    start.textContent='BERHASIL';
   }
@@ -236,5 +235,4 @@ function startScan(){
 }
 </script>
 </body>
-  </html>
- 
+</html>
