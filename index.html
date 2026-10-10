@@ -3,340 +3,183 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kuis Siber | Cyber Academy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulasi Keamanan HP</title>
 <style>
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  padding: 20px;
+  background: #080d18;
+  color: #f5f7ff;
   font-family: Arial, sans-serif;
-  background: #0b1220;
-  color: #f1f5f9;
+  text-align: center;
+  padding: 24px 16px;
 }
-.container {
-  max-width: 520px;
-  margin: 25px auto;
-  background: #172033;
-  padding: 25px;
-  border-radius: 18px;
-  border: 1px solid #334155;
+.phone {
+  max-width: 390px;
+  margin: auto;
+  min-height: 650px;
+  padding: 25px 20px;
+  border: 2px solid #334155;
+  border-radius: 32px;
+  background: #111827;
+  box-shadow: 0 0 35px #ef444422;
 }
-.logo { font-size: 38px; text-align: center; }
-h1 { text-align: center; margin-bottom: 8px; }
-.sub { text-align: center; color: #a5b4fc; }
-.stats {
-  display: flex;
-  justify-content: space-between;
-  margin: 24px 0 12px;
-  color: #cbd5e1;
-  font-size: 14px;
-}
-.bar {
-  height: 7px;
-  background: #334155;
-  border-radius: 8px;
-  overflow: hidden;
-}
-#progress {
-  width: 0%;
-  height: 100%;
-  background: #38bdf8;
-  transition: width .2s;
-}
-.tag {
-  display: inline-block;
-  background: #243b60;
-  color: #7dd3fc;
-  padding: 7px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  margin-top: 22px;
-}
-h2 { font-size: 21px; line-height: 1.5; }
-.option {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 14px;
-  margin: 10px 0;
-  background: #202d43;
-  color: white;
-  border: 1px solid #475569;
-  border-radius: 10px;
-  font-size: 15px;
-  cursor: pointer;
-}
-.option:disabled { cursor: default; opacity: 1; }
-.option.correct {
-  border-color: #4ade80;
-  background: #14532d;
-}
-.option.wrong {
-  border-color: #f87171;
-  background: #7f1d1d;
-}
-#feedback {
+.icon { font-size: 65px; margin-top: 20px; }
+h1 { font-size: 24px; color: #ff5252; }
+p { color: #cbd5e1; line-height: 1.6; }
+.notice {
   display: none;
-  padding: 14px;
+  margin: 15px 0;
+  padding: 12px;
+  background: #3b1720;
+  border: 1px solid #ef4444;
   border-radius: 10px;
-  background: #243449;
-  line-height: 1.6;
-  margin-top: 18px;
 }
-button.next, button.start {
+button {
   width: 100%;
   padding: 14px;
-  background: #0284c7;
-  color: white;
+  margin-top: 12px;
   border: 0;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: bold;
-  margin-top: 16px;
   cursor: pointer;
 }
-button:focus-visible {
-  outline: 2px solid white;
-  outline-offset: 3px;
+.start { background: #ef4444; color: white; }
+.safe { background: #16a34a; color: white; }
+.bar {
+  height: 12px;
+  background: #334155;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
 }
-#result { display: none; text-align: center; }
-.small { color: #94a3b8; font-size: 13px; text-align: center; }
+.progress {
+  width: 0%;
+  height: 100%;
+  background: #22c55e;
+  transition: width .3s;
+}
+#status { color: #93c5fd; }
+#result { display: none; }
+.small { font-size: 12px; color: #94a3b8; }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="logo">🛡️</div>
-  <h1>CYBER ACADEMY</h1>
-  <p class="sub">Uji pengetahuan keamanan digitalmu!</p>
+<div class="phone">
+  <div class="icon" id="icon">🛡️</div>
+  <h1 id="heading">SIMULASI KEAMANAN HP</h1>
+  <p id="description">
+    Tekan tombol di bawah untuk menjalankan simulasi
+    pemindaian keamanan perangkat.
+  </p>
 
-  <section id="quiz">
-    <div class="stats">
-      <span id="number">Pertanyaan 1/10</span>
-      <span id="score">Skor: 0</span>
-    </div>
-    <div class="bar"><div id="progress"></div></div>
-    <span class="tag" id="category">DASAR SIBER</span>
-    <h2 id="question"></h2>
-    <div id="options"></div>
-    <div id="feedback" aria-live="polite"></div>
-    <button class="next" id="next" hidden>Berikutnya →</button>
-  </section>
+  <div class="notice" id="notice">
+    ⚠️ SIMULASI: Aktivitas mencurigakan terdeteksi!
+  </div>
 
-  <section id="result">
-    <h2>🏆 Kuis Selesai!</h2>
-    <p id="finalScore"></p>
-    <p id="message"></p>
-    <button class="start" id="restart">Ulangi Kuis</button>
-  </section>
-  <p class="small">Cyber Academy • Belajar siber dengan aman</p>
+  <div class="bar">
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <p id="status">Status: Siap melakukan simulasi</p>
+
+  <button class="start" id="start" onclick="scan()">
+    Mulai Simulasi
+  </button>
+
+  <div id="result">
+    <h2 style="color:#22c55e">✅ Simulasi Selesai</h2>
+    <p>
+      Ini hanya efek visual untuk edukasi.
+      HP kamu tidak dipindai atau diubah oleh halaman ini.
+    </p>
+    <button class="safe" onclick="resetDemo()">
+      Ulangi Simulasi
+    </button>
+  </div>
+
+  <p class="small">
+    DEMO EDUKASI • BUKAN ANTIVIRUS ASLI
+  </p>
 </div>
 
 <script>
-const questions = [
-  {
-    cat: "PHISHING",
-    q: "Apa yang dimaksud dengan phishing?",
-    a: [
-      "Teknik menipu untuk mencuri informasi pribadi",
-      "Cara mempercepat internet",
-      "Aplikasi untuk mengedit foto",
-      "Metode memperbaiki komputer"
-    ],
-    correct: 0,
-    exp: "Phishing adalah penipuan yang menyamar sebagai pihak tepercaya untuk mendapatkan data korban."
-  },
-  {
-    cat: "PASSWORD",
-    q: "Manakah password yang paling aman?",
-    a: [
-      "12345678",
-      "password123",
-      "Gabungan panjang dan unik yang sulit ditebak",
-      "Tanggal lahir sendiri"
-    ],
-    correct: 2,
-    exp: "Gunakan password panjang dan unik untuk setiap akun. Pengelola password dapat membantu."
-  },
-  {
-    cat: "OTP",
-    q: "Seseorang meminta kode OTP akunmu. Apa yang harus dilakukan?",
-    a: [
-      "Berikan jika dia mengaku petugas",
-      "Unggah ke media sosial",
-      "Kirim jika dia mengetahui nama kita",
-      "Jangan berikan kode tersebut"
-    ],
-    correct: 3,
-    exp: "OTP adalah kode rahasia. Jangan bagikan kepada siapa pun, termasuk orang yang mengaku petugas."
-  },
-  {
-    cat: "LINK BERBAHAYA",
-    q: "Kamu menerima link hadiah gratis dari nomor tak dikenal. Apa tindakan terbaik?",
-    a: [
-      "Langsung membukanya",
-      "Periksa sumbernya dan jangan membuka jika mencurigakan",
-      "Masukkan password untuk mengecek",
-      "Teruskan ke semua teman"
-    ],
-    correct: 1,
-    exp: "Periksa pengirim dan alamat situs melalui sumber resmi. Jangan terburu-buru mengeklik link."
-  },
-  {
-    cat: "MALWARE",
-    q: "Apa itu malware?",
-    a: [
-      "Program berbahaya yang dapat merusak atau menyalahgunakan perangkat",
-      "Jenis kabel internet",
-      "Sistem operasi resmi",
-      "Aplikasi menggambar"
-    ],
-    correct: 0,
-    exp: "Malware mencakup program berbahaya seperti virus, spyware, dan ransomware."
-  },
-  {
-    cat: "WI-FI",
-    q: "Saat memakai Wi-Fi publik, kebiasaan mana yang paling aman?",
-    a: [
-      "Melakukan semua transaksi tanpa memeriksa jaringan",
-      "Mematikan semua perlindungan perangkat",
-      "Menghindari transaksi sensitif pada jaringan yang tidak tepercaya",
-      "Membagikan password kepada pengguna lain"
-    ],
-    correct: 2,
-    exp: "Gunakan jaringan tepercaya jika memungkinkan dan pastikan situs menggunakan HTTPS."
-  },
-  {
-    cat: "PRIVASI",
-    q: "Informasi mana yang sebaiknya tidak dibagikan sembarangan?",
-    a: [
-      "Informasi cuaca umum",
-      "Nomor OTP dan password",
-      "Nama mata pelajaran",
-      "Berita olahraga umum"
-    ],
-    correct: 1,
-    exp: "Password, OTP, dan informasi pemulihan akun harus dijaga kerahasiaannya."
-  },
-  {
-    cat: "KEAMANAN AKUN",
-    q: "Apa manfaat autentikasi dua faktor (2FA)?",
-    a: [
-      "Membuat password terlihat publik",
-      "Menghapus semua virus otomatis",
-      "Membuat internet selalu cepat",
-      "Menambahkan lapisan keamanan saat masuk akun"
-    ],
-    correct: 3,
-    exp: "2FA menambahkan verifikasi selain password sehingga akun lebih sulit diakses orang lain."
-  },
-  {
-    cat: "MEDIA SOSIAL",
-    q: "Akun teman mengirim pesan aneh dan meminta uang. Apa yang sebaiknya kamu lakukan?",
-    a: [
-      "Kirim uang secepatnya",
-      "Periksa melalui jalur lain apakah benar temanmu",
-      "Kirim data akunmu",
-      "Sebarkan pesan itu tanpa memeriksa"
-    ],
-    correct: 1,
-    exp: "Akun teman bisa diretas. Hubungi teman lewat telepon atau jalur lain untuk memastikan."
-  },
-  {
-    cat: "UPDATE",
-    q: "Mengapa aplikasi dan sistem operasi perlu diperbarui?",
-    a: [
-      "Agar semua data otomatis terhapus",
-      "Agar password bisa dilihat orang lain",
-      "Untuk memperbaiki bug dan menutup celah keamanan",
-      "Supaya perangkat tidak perlu dikunci"
-    ],
-    correct: 2,
-    exp: "Pembaruan sering menyertakan perbaikan keamanan yang melindungi perangkat."
-  }
-];
+let running = false;
 
-let index = 0;
-let points = 0;
-let answered = false;
+function scan() {
+  if (running) return;
+  running = true;
 
-const $ = id => document.getElementById(id);
+  const heading = document.getElementById("heading");
+  const description = document.getElementById("description");
+  const status = document.getElementById("status");
+  const progress = document.getElementById("progress");
+  const notice = document.getElementById("notice");
+  const icon = document.getElementById("icon");
+  const start = document.getElementById("start");
+  const result = document.getElementById("result");
 
-function renderQuestion() {
-  answered = false;
-  const item = questions[index];
-  $("number").textContent = `Pertanyaan ${index + 1}/${questions.length}`;
-  $("score").textContent = `Skor: ${points}`;
-  $("progress").style.width = `${index / questions.length * 100}%`;
-  $("category").textContent = item.cat;
-  $("question").textContent = item.q;
-  $("options").replaceChildren();
-  $("feedback").style.display = "none";
-  $("next").hidden = true;
+  start.disabled = true;
+  start.textContent = "Simulasi Berjalan...";
+  heading.textContent = "MEMINDAI PERANGKAT";
+  description.textContent =
+    "Menampilkan contoh proses pemindaian keamanan.";
+  icon.textContent = "🔍";
 
-  item.a.forEach((answer, i) => {
-    const button = document.createElement("button");
-    button.className = "option";
-    button.textContent = `${String.fromCharCode(65 + i)}. ${answer}`;
-    button.addEventListener("click", () => chooseAnswer(i));
-    $("options").appendChild(button);
-  });
-}
+  let value = 0;
+  const messages = [
+    "Memeriksa aplikasi (simulasi)...",
+    "Memeriksa keamanan jaringan (simulasi)...",
+    "Mendeteksi ancaman palsu...",
+    "Menyelesaikan simulasi..."
+  ];
 
-function chooseAnswer(choice) {
-  if (answered) return;
-  answered = true;
+  const timer = setInterval(() => {
+    value += 5;
+    progress.style.width = value + "%";
+    status.textContent = messages[
+      Math.min(Math.floor(value / 30), messages.length - 1)
+    ];
 
-  const item = questions[index];
-  const buttons = $("options").querySelectorAll("button");
-  buttons.forEach((button, i) => {
-    button.disabled = true;
-    if (i === item.correct) button.classList.add("correct");
-    if (i === choice && i !== item.correct) {
-      button.classList.add("wrong");
+    if (value === 50) {
+      notice.style.display = "block";
+      icon.textContent = "⚠️";
+      heading.textContent = "PERINGATAN SIMULASI!";
     }
-  });
 
-  if (choice === item.correct) points += 10;
-  $("score").textContent = `Skor: ${points}`;
-  $("feedback").style.display = "block";
-  $("feedback").textContent =
-    (choice === item.correct ? "✅ Benar! " : "❌ Belum tepat. ") +
-    item.exp;
-
-  $("next").textContent =
-    index === questions.length - 1 ? "Lihat Hasil 🏆" : "Berikutnya →";
-  $("next").hidden = false;
-  $("progress").style.width =
-    `${(index + 1) / questions.length * 100}%`;
+    if (value >= 100) {
+      clearInterval(timer);
+      running = false;
+      heading.textContent = "HASIL SIMULASI";
+      description.textContent =
+        "Peringatan tadi dibuat oleh halaman demo, bukan hasil deteksi virus sungguhan.";
+      icon.textContent = "✅";
+      status.textContent = "Status: Demo selesai";
+      notice.style.display = "none";
+      start.style.display = "none";
+      result.style.display = "block";
+    }
+  }, 150);
 }
 
-$("next").addEventListener("click", () => {
-  index++;
-  if (index < questions.length) {
-    renderQuestion();
-  } else {
-    $("quiz").style.display = "none";
-    $("result").style.display = "block";
-    $("finalScore").textContent =
-      `Skor akhir kamu: ${points}/${questions.length * 10}`;
-    $("message").textContent =
-      points === 100 ? "Luar biasa! Kamu menjawab semuanya dengan benar." :
-      points >= 70 ? "Bagus! Terus tingkatkan pengetahuan siber kamu." :
-      "Tetap semangat! Pelajari pembahasannya dan coba lagi.";
-  }
-});
-
-$("restart").addEventListener("click", () => {
-  index = 0;
-  points = 0;
-  $("result").style.display = "none";
-  $("quiz").style.display = "block";
-  renderQuestion();
-});
-
-renderQuestion();
+function resetDemo() {
+  document.getElementById("progress").style.width = "0%";
+  document.getElementById("notice").style.display = "none";
+  document.getElementById("result").style.display = "none";
+  document.getElementById("start").style.display = "block";
+  document.getElementById("start").disabled = false;
+  document.getElementById("start").textContent = "Mulai Simulasi";
+  document.getElementById("heading").textContent =
+    "SIMULASI KEAMANAN HP";
+  document.getElementById("description").textContent =
+    "Tekan tombol di bawah untuk menjalankan simulasi pemindaian keamanan perangkat.";
+  document.getElementById("icon").textContent = "🛡️";
+  document.getElementById("status").textContent =
+    "Status: Siap melakukan simulasi";
+}
 </script>
 </body>
   </html>
-  
+    
