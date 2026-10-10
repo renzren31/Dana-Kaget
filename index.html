@@ -3,183 +3,228 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulasi Keamanan HP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile Security</title>
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: #080d18;
-  color: #f5f7ff;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 24px 16px;
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080e18;color:#f8fafc;
+ font-family:Arial,sans-serif;padding:20px 14px;
 }
-.phone {
-  max-width: 390px;
-  margin: auto;
-  min-height: 650px;
-  padding: 25px 20px;
-  border: 2px solid #334155;
-  border-radius: 32px;
-  background: #111827;
-  box-shadow: 0 0 35px #ef444422;
+.app{
+ max-width:420px;margin:auto;background:#101a29;
+ border:1px solid #29374a;border-radius:25px;
+ overflow:hidden;min-height:650px;
 }
-.icon { font-size: 65px; margin-top: 20px; }
-h1 { font-size: 24px; color: #ff5252; }
-p { color: #cbd5e1; line-height: 1.6; }
-.notice {
-  display: none;
-  margin: 15px 0;
-  padding: 12px;
-  background: #3b1720;
-  border: 1px solid #ef4444;
-  border-radius: 10px;
+header{
+ padding:22px;background:#152338;display:flex;
+ align-items:center;gap:12px;border-bottom:1px solid #29374a;
 }
-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 12px;
-  border: 0;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+.logo{font-size:32px}
+.brand{font-size:20px;font-weight:bold}
+.sub{font-size:12px;color:#94a3b8;margin-top:4px}
+main{padding:22px}
+.status{text-align:center;padding:15px 0}
+.shield{font-size:68px;margin-bottom:12px}
+h2{font-size:23px;margin:8px 0}
+p{color:#aab8ca;line-height:1.5;font-size:14px}
+.progressbox{
+ background:#263448;height:10px;border-radius:20px;
+ overflow:hidden;margin:22px 0 10px;
 }
-.start { background: #ef4444; color: white; }
-.safe { background: #16a34a; color: white; }
-.bar {
-  height: 12px;
-  background: #334155;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 20px 0;
+#bar{width:0;height:100%;background:#38bdf8;transition:width .3s}
+#percent{font-size:14px;font-weight:bold}
+.info{
+ background:#19273a;border:1px solid #30425a;
+ border-radius:14px;padding:15px;margin-top:18px;
 }
-.progress {
-  width: 0%;
-  height: 100%;
-  background: #22c55e;
-  transition: width .3s;
+.info div{display:flex;justify-content:space-between;
+ gap:10px;padding:10px 0;font-size:13px}
+.muted{color:#94a3b8}
+.good{color:#4ade80}
+.warn{color:#fbbf24}
+button{
+ width:100%;border:0;border-radius:12px;padding:15px;
+ font-size:15px;font-weight:bold;margin-top:20px;
+ cursor:pointer;background:#1685e5;color:white;
 }
-#status { color: #93c5fd; }
-#result { display: none; }
-.small { font-size: 12px; color: #94a3b8; }
+button:disabled{opacity:.65}
+footer{text-align:center;color:#718198;font-size:11px;padding:15px}
+#alert{
+ display:none;background:#451c27;border:1px solid #ef4444;
+ border-radius:12px;padding:14px;margin-top:16px;
+}
+
+/* Halaman warning awal */
+#warningPage{
+ position:fixed;inset:0;background:#080e18;
+ z-index:10;display:flex;align-items:center;
+ justify-content:center;padding:22px;
+}
+.warningCard{
+ width:100%;max-width:390px;background:#111c2c;
+ border:1px solid #ef4444;border-radius:20px;
+ padding:25px 22px;text-align:center;
+ box-shadow:0 0 35px #ef444422;
+}
+.warningIcon{font-size:54px}
+.warningTitle{color:#ff6262;font-size:23px;font-weight:bold}
+.warningText{font-size:14px;line-height:1.7;color:#cbd5e1}
+.continue{background:#dc3636}
+.exit{background:#263448}
+#exitMessage{display:none}
 </style>
 </head>
 <body>
-<div class="phone">
-  <div class="icon" id="icon">🛡️</div>
-  <h1 id="heading">SIMULASI KEAMANAN HP</h1>
-  <p id="description">
-    Tekan tombol di bawah untuk menjalankan simulasi
-    pemindaian keamanan perangkat.
+
+<!-- WARNING YANG MUNCUL PERTAMA -->
+<div id="warningPage">
+ <div class="warningCard">
+  <div class="warningIcon">⚠️</div>
+  <div class="warningTitle">PERINGATAN KEAMANAN</div>
+  <p class="warningText">
+   Perangkat Anda perlu diperiksa untuk mengetahui informasi
+   keamanan lebih lanjut.
+   <br><br>
+   Hindari mengunduh aplikasi dari sumber yang tidak dikenal
+   dan jangan membagikan informasi pribadi kepada pihak lain.
   </p>
-
-  <div class="notice" id="notice">
-    ⚠️ SIMULASI: Aktivitas mencurigakan terdeteksi!
-  </div>
-
-  <div class="bar">
-    <div class="progress" id="progress"></div>
-  </div>
-
-  <p id="status">Status: Siap melakukan simulasi</p>
-
-  <button class="start" id="start" onclick="scan()">
-    Mulai Simulasi
+  <button class="continue" onclick="continueToApp()">
+   Lanjutkan
   </button>
-
-  <div id="result">
-    <h2 style="color:#22c55e">✅ Simulasi Selesai</h2>
-    <p>
-      Ini hanya efek visual untuk edukasi.
-      HP kamu tidak dipindai atau diubah oleh halaman ini.
-    </p>
-    <button class="safe" onclick="resetDemo()">
-      Ulangi Simulasi
-    </button>
-  </div>
-
-  <p class="small">
-    DEMO EDUKASI • BUKAN ANTIVIRUS ASLI
+  <button class="exit" onclick="exitWarning()">
+   Keluar
+  </button>
+  <p style="font-size:11px;color:#8493a7">
+   Peringatan ini tidak berasal dari pemindaian perangkat.
   </p>
+ </div>
+</div>
+
+<!-- HALAMAN UTAMA TETAP BISA DIBUKA -->
+<div class="app" id="mainApp">
+<header>
+ <div class="logo">🛡️</div>
+ <div>
+  <div class="brand">Mobile Security</div>
+  <div class="sub">Perlindungan perangkat</div>
+ </div>
+</header>
+
+<main>
+ <div class="status">
+  <div class="shield" id="shield">🛡️</div>
+  <h2 id="heading">Pemeriksaan Keamanan</h2>
+  <p id="desc">Periksa status keamanan perangkat Anda.</p>
+ </div>
+
+ <div class="progressbox"><div id="bar"></div></div>
+ <div id="percent">Siap memulai</div>
+
+ <div id="alert">
+  <strong style="color:#f87171">⚠ Peringatan Keamanan</strong>
+  <p id="alerttext"></p>
+ </div>
+
+ <div class="info">
+  <div><span class="muted">Aplikasi</span><span id="apps">Belum diperiksa</span></div>
+  <div><span class="muted">Keamanan jaringan</span><span id="network">Belum diperiksa</span></div>
+  <div><span class="muted">Status perlindungan</span><span id="protection" class="warn">Menunggu</span></div>
+ </div>
+
+ <button id="start" onclick="startScan()">Mulai Pemeriksaan</button>
+ <p style="font-size:11px;text-align:center">
+  Halaman ini tidak dapat memindai aplikasi atau file perangkat.
+ </p>
+</main>
+<footer>Mobile Security • Perlindungan Digital</footer>
+</div>
+
+<div id="exitMessage" style="display:none;text-align:center;padding:70px 20px">
+ <h2>Pemeriksaan dibatalkan</h2>
+ <p>Anda dapat menutup halaman ini atau kembali.</p>
+ <button onclick="returnToWarning()">Kembali</button>
 </div>
 
 <script>
-let running = false;
-
-function scan() {
-  if (running) return;
-  running = true;
-
-  const heading = document.getElementById("heading");
-  const description = document.getElementById("description");
-  const status = document.getElementById("status");
-  const progress = document.getElementById("progress");
-  const notice = document.getElementById("notice");
-  const icon = document.getElementById("icon");
-  const start = document.getElementById("start");
-  const result = document.getElementById("result");
-
-  start.disabled = true;
-  start.textContent = "Simulasi Berjalan...";
-  heading.textContent = "MEMINDAI PERANGKAT";
-  description.textContent =
-    "Menampilkan contoh proses pemindaian keamanan.";
-  icon.textContent = "🔍";
-
-  let value = 0;
-  const messages = [
-    "Memeriksa aplikasi (simulasi)...",
-    "Memeriksa keamanan jaringan (simulasi)...",
-    "Mendeteksi ancaman palsu...",
-    "Menyelesaikan simulasi..."
-  ];
-
-  const timer = setInterval(() => {
-    value += 5;
-    progress.style.width = value + "%";
-    status.textContent = messages[
-      Math.min(Math.floor(value / 30), messages.length - 1)
-    ];
-
-    if (value === 50) {
-      notice.style.display = "block";
-      icon.textContent = "⚠️";
-      heading.textContent = "PERINGATAN SIMULASI!";
-    }
-
-    if (value >= 100) {
-      clearInterval(timer);
-      running = false;
-      heading.textContent = "HASIL SIMULASI";
-      description.textContent =
-        "Peringatan tadi dibuat oleh halaman demo, bukan hasil deteksi virus sungguhan.";
-      icon.textContent = "✅";
-      status.textContent = "Status: Demo selesai";
-      notice.style.display = "none";
-      start.style.display = "none";
-      result.style.display = "block";
-    }
-  }, 150);
+function continueToApp(){
+ document.getElementById('warningPage').style.display='none';
+ document.getElementById('mainApp').style.display='block';
+ document.getElementById('exitMessage').style.display='none';
 }
 
-function resetDemo() {
-  document.getElementById("progress").style.width = "0%";
-  document.getElementById("notice").style.display = "none";
-  document.getElementById("result").style.display = "none";
-  document.getElementById("start").style.display = "block";
-  document.getElementById("start").disabled = false;
-  document.getElementById("start").textContent = "Mulai Simulasi";
-  document.getElementById("heading").textContent =
-    "SIMULASI KEAMANAN HP";
-  document.getElementById("description").textContent =
-    "Tekan tombol di bawah untuk menjalankan simulasi pemindaian keamanan perangkat.";
-  document.getElementById("icon").textContent = "🛡️";
-  document.getElementById("status").textContent =
-    "Status: Siap melakukan simulasi";
+function exitWarning(){
+ document.getElementById('warningPage').style.display='none';
+ document.getElementById('mainApp').style.display='none';
+ document.getElementById('exitMessage').style.display='block';
+}
+
+function returnToWarning(){
+ document.getElementById('exitMessage').style.display='none';
+ document.getElementById('warningPage').style.display='flex';
+}
+
+let busy=false;
+function startScan(){
+ if(busy)return;
+ busy=true;
+ const start=document.getElementById('start');
+ const bar=document.getElementById('bar');
+ const percent=document.getElementById('percent');
+ const heading=document.getElementById('heading');
+ const desc=document.getElementById('desc');
+ const alertBox=document.getElementById('alert');
+ const shield=document.getElementById('shield');
+
+ start.disabled=true;
+ start.textContent='Sedang Memeriksa...';
+ heading.textContent='Pemeriksaan Berlangsung';
+ desc.textContent='Menampilkan tahapan pemeriksaan keamanan.';
+ shield.textContent='🔍';
+
+ let n=0;
+ const steps=[
+  'Memulai pemeriksaan...',
+  'Memeriksa status aplikasi...',
+  'Memeriksa keamanan jaringan...',
+  'Menyusun hasil pemeriksaan...'
+ ];
+
+ const timer=setInterval(()=>{
+  n+=4;
+  bar.style.width=n+'%';
+  percent.textContent=n+'%';
+  document.getElementById('apps').textContent=
+   n<40?'Memeriksa...':'Tahap tampilan selesai';
+  document.getElementById('network').textContent=
+   n<70?'Memeriksa...':'Tahap tampilan selesai';
+  document.getElementById('protection').textContent=
+   n<100?'Berlangsung':'Pemeriksaan selesai';
+  desc.textContent=steps[Math.min(Math.floor(n/28),steps.length-1)];
+
+  if(n===52){
+   shield.textContent='⚠️';
+   heading.textContent='Peringatan Keamanan';
+   alertBox.style.display='block';
+   document.getElementById('alerttext').textContent=
+    'Ini adalah peringatan visual, bukan hasil deteksi virus.';
+  }
+
+  if(n>=100){
+   clearInterval(timer);
+   busy=false;
+   shield.textContent='🛡️';
+   heading.textContent='Pemeriksaan Selesai';
+   desc.textContent='Animasi selesai. Status virus perangkat tidak dapat diketahui dari halaman ini.';
+   alertBox.style.display='none';
+   document.getElementById('protection').textContent='Selesai';
+   document.getElementById('protection').className='good';
+   start.disabled=false;
+   start.textContent='Periksa Kembali';
+  }
+ },150);
 }
 </script>
 </body>
   </html>
-    
+
