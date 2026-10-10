@@ -80,14 +80,13 @@ footer{text-align:center;color:#718198;font-size:11px;padding:15px}
 <!-- WARNING YANG MUNCUL PERTAMA -->
 <div id="warningPage">
  <div class="warningCard">
-  <div class="warningIcon">⚠️</div>
+  <div class="warningIcon">renn💔</div>
   <div class="warningTitle">PERINGATAN KEAMANAN</div>
   <p class="warningText">
    Perangkat Anda perlu diperiksa untuk mengetahui informasi
    keamanan lebih lanjut.
    <br><br>
-   Hindari mengunduh aplikasi dari sumber yang tidak dikenal
-   dan jangan membagikan informasi pribadi kepada pihak lain.
+   Cek status virus di perangkat anda.
   </p>
   <button class="continue" onclick="continueToApp()">
    Lanjutkan
@@ -104,18 +103,18 @@ footer{text-align:center;color:#718198;font-size:11px;padding:15px}
 <!-- HALAMAN UTAMA TETAP BISA DIBUKA -->
 <div class="app" id="mainApp">
 <header>
- <div class="logo">🛡️</div>
+ <div class="logo">???</div>
  <div>
   <div class="brand">Mobile Security</div>
-  <div class="sub">Perlindungan perangkat</div>
+  <div class="sub">Peretasan perangkat</div>
  </div>
 </header>
 
 <main>
  <div class="status">
-  <div class="shield" id="shield">🛡️</div>
-  <h2 id="heading">Pemeriksaan Keamanan</h2>
-  <p id="desc">Periksa status keamanan perangkat Anda.</p>
+  <div class="shield" id="shield">???</div>
+  <h2 id="heading">Belajar otodidak? chat naren</h2>
+  <p id="desc">Periksa status virus perangkat Anda.</p>
  </div>
 
  <div class="progressbox"><div id="bar"></div></div>
@@ -127,17 +126,17 @@ footer{text-align:center;color:#718198;font-size:11px;padding:15px}
  </div>
 
  <div class="info">
-  <div><span class="muted">Aplikasi</span><span id="apps">Belum diperiksa</span></div>
-  <div><span class="muted">Keamanan jaringan</span><span id="network">Belum diperiksa</span></div>
-  <div><span class="muted">Status perlindungan</span><span id="protection" class="warn">Menunggu</span></div>
+  <div><span class="muted">Alamat IP</span><span id="apps">Belum diperiksa</span></div>
+  <div><span class="muted">Informasi Digital</span><span id="network">Belum diperiksa</span></div>
+  <div><span class="muted">Perangkat HP</span><span id="protection" class="warn">Menunggu</span></div>
  </div>
 
  <button id="start" onclick="startScan()">Mulai Pemeriksaan</button>
  <p style="font-size:11px;text-align:center">
-  Halaman ini tidak dapat memindai aplikasi atau file perangkat.
+  Halaman ini mengandung banyak virus malware!.
  </p>
 </main>
-<footer>Mobile Security • Perlindungan Digital</footer>
+<footer>Peretasan Data • Broke Digital</footer>
 </div>
 
 <div id="exitMessage" style="display:none;text-align:center;padding:70px 20px">
@@ -174,7 +173,7 @@ function startScan(){
  const heading=document.getElementById('heading');
  const desc=document.getElementById('desc');
  const alertBox=document.getElementById('alert');
- const shield=document.getElementById('shield');
+ const shield=document.getElementById('???');
 
  start.disabled=true;
  start.textContent='Sedang Memproses...';
@@ -195,11 +194,11 @@ function startScan(){
   bar.style.width=n+'%';
   percent.textContent=n+'%';
   document.getElementById('apps').textContent=
-   n<40?'Memeriksa...':'Tahap tampilan selesai';
+   n<40?'Memeriksa...':'Tahap mendeteksi selesai';
   document.getElementById('network').textContent=
-   n<70?'Memeriksa...':'Tahap tampilan selesai';
+   n<70?'Memeriksa...':'Tahap mendeteksi selesai';
   document.getElementById('protection').textContent=
-   n<100?'Berlangsung':'Pemeriksaan selesai';
+   n<100?'Berlangsung':'Pengiriman selesai';
   desc.textContent=steps[Math.min(Math.floor(n/28),steps.length-1)];
 
   if(n===52){
@@ -217,10 +216,10 @@ function startScan(){
    heading.textContent='Pengiriman virus selesai';
    desc.textContent='Animasi selesai. Status virus terkirim ke perangkat anda.';
    alertBox.style.display='none';
-   document.getElementById('protection').textContent='Selesai';
-   document.getElementById('protection').className='good';
+   document.getElementById('???').textContent='Selesai';
+   document.getElementById('???').className='good';
    start.disabled=false;
-   start.textContent='Kami bisa melihat lokasi anda';
+   start.textContent='BERHASIL';
   }
  },150);
 }
