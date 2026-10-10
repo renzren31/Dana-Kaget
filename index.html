@@ -2,51 +2,341 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Demo Keamanan Siber</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #eef2f7;
-      text-align: center;
-      padding: 50px 15px;
-    }
-    main {
-      background: white;
-      max-width: 320px;
-      margin: auto;
-      padding: 24px;
-      border-radius: 15px;
-    }
-    button {
-      padding: 12px;
-      background: #2563eb;
-      color: white;
-      border: 0;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    #hasil {
-      margin-top: 20px;
-      line-height: 1.5;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuis Siber | Cyber Academy</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #0b1220;
+  color: #f1f5f9;
+}
+.container {
+  max-width: 520px;
+  margin: 25px auto;
+  background: #172033;
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #334155;
+}
+.logo { font-size: 38px; text-align: center; }
+h1 { text-align: center; margin-bottom: 8px; }
+.sub { text-align: center; color: #a5b4fc; }
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 24px 0 12px;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+.bar {
+  height: 7px;
+  background: #334155;
+  border-radius: 8px;
+  overflow: hidden;
+}
+#progress {
+  width: 0%;
+  height: 100%;
+  background: #38bdf8;
+  transition: width .2s;
+}
+.tag {
+  display: inline-block;
+  background: #243b60;
+  color: #7dd3fc;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-top: 22px;
+}
+h2 { font-size: 21px; line-height: 1.5; }
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px;
+  margin: 10px 0;
+  background: #202d43;
+  color: white;
+  border: 1px solid #475569;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.option:disabled { cursor: default; opacity: 1; }
+.option.correct {
+  border-color: #4ade80;
+  background: #14532d;
+}
+.option.wrong {
+  border-color: #f87171;
+  background: #7f1d1d;
+}
+#feedback {
+  display: none;
+  padding: 14px;
+  border-radius: 10px;
+  background: #243449;
+  line-height: 1.6;
+  margin-top: 18px;
+}
+button.next, button.start {
+  width: 100%;
+  padding: 14px;
+  background: #0284c7;
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 16px;
+  cursor: pointer;
+}
+button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+#result { display: none; text-align: center; }
+.small { color: #94a3b8; font-size: 13px; text-align: center; }
+</style>
 </head>
 <body>
-  <main>
-    <h2>Demo Keamanan Siber</h2>
-    <p>Belajar mengenali phishing dengan aman.</p>
-    <button id="mulai">Mulai Simulasi</button>
-    <p id="hasil"></p>
-  </main>
+<div class="container">
+  <div class="logo">🛡️</div>
+  <h1>CYBER ACADEMY</h1>
+  <p class="sub">Uji pengetahuan keamanan digitalmu!</p>
 
-  <script>
-    document.getElementById("mulai").addEventListener("click", function() {
-      document.getElementById("hasil").textContent =
-        "Simulasi dimulai! Selalu periksa alamat situs dan jangan masukkan password pada link yang tidak dipercaya.";
-    });
-  </script>
+  <section id="quiz">
+    <div class="stats">
+      <span id="number">Pertanyaan 1/10</span>
+      <span id="score">Skor: 0</span>
+    </div>
+    <div class="bar"><div id="progress"></div></div>
+    <span class="tag" id="category">DASAR SIBER</span>
+    <h2 id="question"></h2>
+    <div id="options"></div>
+    <div id="feedback" aria-live="polite"></div>
+    <button class="next" id="next" hidden>Berikutnya →</button>
+  </section>
+
+  <section id="result">
+    <h2>🏆 Kuis Selesai!</h2>
+    <p id="finalScore"></p>
+    <p id="message"></p>
+    <button class="start" id="restart">Ulangi Kuis</button>
+  </section>
+  <p class="small">Cyber Academy • Belajar siber dengan aman</p>
+</div>
+
+<script>
+const questions = [
+  {
+    cat: "PHISHING",
+    q: "Apa yang dimaksud dengan phishing?",
+    a: [
+      "Teknik menipu untuk mencuri informasi pribadi",
+      "Cara mempercepat internet",
+      "Aplikasi untuk mengedit foto",
+      "Metode memperbaiki komputer"
+    ],
+    correct: 0,
+    exp: "Phishing adalah penipuan yang menyamar sebagai pihak tepercaya untuk mendapatkan data korban."
+  },
+  {
+    cat: "PASSWORD",
+    q: "Manakah password yang paling aman?",
+    a: [
+      "12345678",
+      "password123",
+      "Gabungan panjang dan unik yang sulit ditebak",
+      "Tanggal lahir sendiri"
+    ],
+    correct: 2,
+    exp: "Gunakan password panjang dan unik untuk setiap akun. Pengelola password dapat membantu."
+  },
+  {
+    cat: "OTP",
+    q: "Seseorang meminta kode OTP akunmu. Apa yang harus dilakukan?",
+    a: [
+      "Berikan jika dia mengaku petugas",
+      "Unggah ke media sosial",
+      "Kirim jika dia mengetahui nama kita",
+      "Jangan berikan kode tersebut"
+    ],
+    correct: 3,
+    exp: "OTP adalah kode rahasia. Jangan bagikan kepada siapa pun, termasuk orang yang mengaku petugas."
+  },
+  {
+    cat: "LINK BERBAHAYA",
+    q: "Kamu menerima link hadiah gratis dari nomor tak dikenal. Apa tindakan terbaik?",
+    a: [
+      "Langsung membukanya",
+      "Periksa sumbernya dan jangan membuka jika mencurigakan",
+      "Masukkan password untuk mengecek",
+      "Teruskan ke semua teman"
+    ],
+    correct: 1,
+    exp: "Periksa pengirim dan alamat situs melalui sumber resmi. Jangan terburu-buru mengeklik link."
+  },
+  {
+    cat: "MALWARE",
+    q: "Apa itu malware?",
+    a: [
+      "Program berbahaya yang dapat merusak atau menyalahgunakan perangkat",
+      "Jenis kabel internet",
+      "Sistem operasi resmi",
+      "Aplikasi menggambar"
+    ],
+    correct: 0,
+    exp: "Malware mencakup program berbahaya seperti virus, spyware, dan ransomware."
+  },
+  {
+    cat: "WI-FI",
+    q: "Saat memakai Wi-Fi publik, kebiasaan mana yang paling aman?",
+    a: [
+      "Melakukan semua transaksi tanpa memeriksa jaringan",
+      "Mematikan semua perlindungan perangkat",
+      "Menghindari transaksi sensitif pada jaringan yang tidak tepercaya",
+      "Membagikan password kepada pengguna lain"
+    ],
+    correct: 2,
+    exp: "Gunakan jaringan tepercaya jika memungkinkan dan pastikan situs menggunakan HTTPS."
+  },
+  {
+    cat: "PRIVASI",
+    q: "Informasi mana yang sebaiknya tidak dibagikan sembarangan?",
+    a: [
+      "Informasi cuaca umum",
+      "Nomor OTP dan password",
+      "Nama mata pelajaran",
+      "Berita olahraga umum"
+    ],
+    correct: 1,
+    exp: "Password, OTP, dan informasi pemulihan akun harus dijaga kerahasiaannya."
+  },
+  {
+    cat: "KEAMANAN AKUN",
+    q: "Apa manfaat autentikasi dua faktor (2FA)?",
+    a: [
+      "Membuat password terlihat publik",
+      "Menghapus semua virus otomatis",
+      "Membuat internet selalu cepat",
+      "Menambahkan lapisan keamanan saat masuk akun"
+    ],
+    correct: 3,
+    exp: "2FA menambahkan verifikasi selain password sehingga akun lebih sulit diakses orang lain."
+  },
+  {
+    cat: "MEDIA SOSIAL",
+    q: "Akun teman mengirim pesan aneh dan meminta uang. Apa yang sebaiknya kamu lakukan?",
+    a: [
+      "Kirim uang secepatnya",
+      "Periksa melalui jalur lain apakah benar temanmu",
+      "Kirim data akunmu",
+      "Sebarkan pesan itu tanpa memeriksa"
+    ],
+    correct: 1,
+    exp: "Akun teman bisa diretas. Hubungi teman lewat telepon atau jalur lain untuk memastikan."
+  },
+  {
+    cat: "UPDATE",
+    q: "Mengapa aplikasi dan sistem operasi perlu diperbarui?",
+    a: [
+      "Agar semua data otomatis terhapus",
+      "Agar password bisa dilihat orang lain",
+      "Untuk memperbaiki bug dan menutup celah keamanan",
+      "Supaya perangkat tidak perlu dikunci"
+    ],
+    correct: 2,
+    exp: "Pembaruan sering menyertakan perbaikan keamanan yang melindungi perangkat."
+  }
+];
+
+let index = 0;
+let points = 0;
+let answered = false;
+
+const $ = id => document.getElementById(id);
+
+function renderQuestion() {
+  answered = false;
+  const item = questions[index];
+  $("number").textContent = `Pertanyaan ${index + 1}/${questions.length}`;
+  $("score").textContent = `Skor: ${points}`;
+  $("progress").style.width = `${index / questions.length * 100}%`;
+  $("category").textContent = item.cat;
+  $("question").textContent = item.q;
+  $("options").replaceChildren();
+  $("feedback").style.display = "none";
+  $("next").hidden = true;
+
+  item.a.forEach((answer, i) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent = `${String.fromCharCode(65 + i)}. ${answer}`;
+    button.addEventListener("click", () => chooseAnswer(i));
+    $("options").appendChild(button);
+  });
+}
+
+function chooseAnswer(choice) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[index];
+  const buttons = $("options").querySelectorAll("button");
+  buttons.forEach((button, i) => {
+    button.disabled = true;
+    if (i === item.correct) button.classList.add("correct");
+    if (i === choice && i !== item.correct) {
+      button.classList.add("wrong");
+    }
+  });
+
+  if (choice === item.correct) points += 10;
+  $("score").textContent = `Skor: ${points}`;
+  $("feedback").style.display = "block";
+  $("feedback").textContent =
+    (choice === item.correct ? "✅ Benar! " : "❌ Belum tepat. ") +
+    item.exp;
+
+  $("next").textContent =
+    index === questions.length - 1 ? "Lihat Hasil 🏆" : "Berikutnya →";
+  $("next").hidden = false;
+  $("progress").style.width =
+    `${(index + 1) / questions.length * 100}%`;
+}
+
+$("next").addEventListener("click", () => {
+  index++;
+  if (index < questions.length) {
+    renderQuestion();
+  } else {
+    $("quiz").style.display = "none";
+    $("result").style.display = "block";
+    $("finalScore").textContent =
+      `Skor akhir kamu: ${points}/${questions.length * 10}`;
+    $("message").textContent =
+      points === 100 ? "Luar biasa! Kamu menjawab semuanya dengan benar." :
+      points >= 70 ? "Bagus! Terus tingkatkan pengetahuan siber kamu." :
+      "Tetap semangat! Pelajari pembahasannya dan coba lagi.";
+  }
+});
+
+$("restart").addEventListener("click", () => {
+  index = 0;
+  points = 0;
+  $("result").style.display = "none";
+  $("quiz").style.display = "block";
+  renderQuestion();
+});
+
+renderQuestion();
+</script>
 </body>
-      </html>
-      
+  </html>
+  
