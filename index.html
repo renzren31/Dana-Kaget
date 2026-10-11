@@ -1,62 +1,55 @@
 
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DANA Kaget - Resmi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DANA Kaget</title>
 <style>
 body {
-  margin: 0;
-  padding: 25px;
-  background: #f1f4f9;
+  background: #0878e8;
   font-family: Arial, sans-serif;
   text-align: center;
+  padding: 40px 15px;
 }
 .card {
-  max-width: 350px;
-  margin: 50px auto;
-  padding: 25px;
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px #0002;
+  padding: 25px;
+  border-radius: 15px;
+  max-width: 350px;
+  margin: auto;
 }
 a {
   display: block;
-  padding: 18px;
-  color: white;
   background: #0878e8;
+  color: white;
+  padding: 16px;
   border-radius: 10px;
   text-decoration: none;
   font-weight: bold;
 }
-#warning {
+#hasil {
   display: none;
   margin-top: 20px;
-  text-align: left;
+  color: #b42318;
 }
 </style>
 </head>
 <body>
-
 <div class="card">
   <h2>🎁 DANA Kaget</h2>
-  <p>Ada hadiah untukmu!</p>
-
-  <a href="#warning"
-     onclick="document.getElementById('warning').style.display='block'; return false;">
-     🎁 Klik untuk membuka hadiah
+  <p>Kamu mendapatkan kejutan!</p>
+  <a href="#" onclick="
+    document.getElementById('hasil').style.display='block';
+    return false;">
+    BUKA HADIAH
   </a>
-
-  <div id="warning">
-    <h3 style="color:#c62828">⚠️ Waspada Phishing!</h3>
-    <p>Ini adalah simulasi edukasi keamanan digital.</p>
-    <p>Penipu sering memakai iming-iming hadiah
-    untuk memancing korban mengeklik tautan.</p>
-    <p><b>Jangan pernah membagikan PIN atau kode OTP.</b></p>
-    <p>Periksa hadiah melalui aplikasi resmi DANA.</p>
+  <div id="hasil">
+    <h3>⚠️ PRANK!!</h3>
+    <p>Jangan mudah percaya hadiah dari tautan yang tidak dikenal.</p>
+    <p>Jangan pernah memberikan PIN atau OTP.</p>
   </div>
 </div>
-
 </body>
 </html>
