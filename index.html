@@ -1,44 +1,351 @@
-<form
-  action="https://formsubmit.app/f/5gxrkba6jb"
-  method="POST">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Undian Berhadiah</title>
 
-  <h2>🎁 Undian Berhadiah</h2>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: #050a12;
+}
+
+header {
+  padding: 22px 16px;
+  text-align: center;
+  background: #101827;
+  border-bottom: 1px solid #b78b32;
+}
+
+.brand {
+  color: #ffd45e;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.hero {
+  padding: 42px 18px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at top, #624415, transparent 65%),
+    linear-gradient(140deg, #101827, #03060c);
+}
+
+.hero h1 {
+  color: #ffd45e;
+  font-size: clamp(32px, 8vw, 52px);
+  margin: 10px 0;
+}
+
+.hero p {
+  color: #e2e5ec;
+  line-height: 1.7;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid #c99a36;
+  border-radius: 30px;
+  color: #ffda73;
+  font-size: 12px;
+}
+
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 22px 16px;
+}
+
+h2.section-title {
+  text-align: center;
+  color: #ffd45e;
+  margin-bottom: 20px;
+}
+
+.prizes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.prize {
+  overflow: hidden;
+  background: #111b2a;
+  border: 1px solid #57451f;
+  border-radius: 15px;
+}
+
+.prize img {
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+  display: block;
+  background: #26303d;
+}
+
+.prize-info {
+  padding: 13px;
+  text-align: center;
+}
+
+.prize-info h3 {
+  color: #ffda73;
+  margin: 4px 0 7px;
+}
+
+.prize-info p {
+  color: #c6ced9;
+  font-size: 13px;
+  margin: 0;
+}
+
+.register {
+  max-width: 550px;
+  margin: 10px auto 35px;
+  padding: 23px;
+  border: 1px solid #8c6c2b;
+  border-radius: 18px;
+  background: #101a29;
+  box-shadow: 0 10px 35px #0005;
+}
+
+.register h2 {
+  color: #ffd45e;
+  text-align: center;
+}
+
+.register > p {
+  color: #cbd2dc;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.field {
+  margin: 18px 0;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #44536a;
+  border-radius: 9px;
+  background: #08111e;
+  color: white;
+  font: inherit;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: 2px solid #d5a83e;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #d3d8e0;
+  margin: 18px 0;
+}
+
+.consent input {
+  margin-top: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(90deg, #ffdc67, #e8a92d);
+  color: #17120a;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+footer {
+  padding: 24px 15px;
+  text-align: center;
+  color: #aab3c1;
+  background: #0c1420;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+@media (max-width: 360px) {
+  .prizes {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">🎁 UNDIAN BERHADIAH</div>
+  <p>Kesempatan untuk meraih hadiah menarik</p>
+</header>
+
+<section class="hero">
+  <span class="badge">✨ PROGRAM UNDIAN</span>
+  <h1>MENANGKAN<br>HADIAH IMPIAN!</h1>
   <p>
-    Isi data berikut untuk mendaftar undian.
-    Nama dan nomor WhatsApp akan dikirim ke
-    pengelola melalui layanan formulir.
+    Mobil, motor, dan hadiah emas dalam
+    satu halaman undian.
   </p>
+</section>
 
-  <div>
-    <label for="nama">Nama peserta</label>
-    <input
-      id="nama"
-      type="text"
-      name="nama"
-      maxlength="80"
-      required>
-  </div>
+<main class="container">
 
-  <div>
-    <label for="wa">Nomor WhatsApp</label>
-    <input
-      id="wa"
-      type="tel"
-      name="nomor_whatsapp"
-      placeholder="Contoh: 081234567890"
-      pattern="[0-9+() -]{9,20}"
-      required>
-  </div>
+  <h2 class="section-title">🏆 HADIAH UNDIAN</h2>
 
-  <label>
-    <input
-      type="checkbox"
-      name="persetujuan"
-      value="setuju"
-      required>
-    Saya setuju data pendaftaran saya dikirim
-    kepada pengelola untuk keperluan undian.
-  </label>
+  <section class="prizes">
 
-  <button type="submit">Daftar Undian</button>
-</form>
+    <article class="prize">
+      <img
+        src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=700&q=80"
+        alt="Mobil"
+        loading="lazy">
+      <div class="prize-info">
+        <h3>🚘 Hadiah Mobil</h3>
+        <p>Hadiah utama undian</p>
+      </div>
+    </article>
+
+    <article class="prize">
+      <img
+        src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=700&q=80"
+        alt="Sepeda motor"
+        loading="lazy">
+      <div class="prize-info">
+        <h3>🏍️ Hadiah Motor</h3>
+        <p>Hadiah spesial peserta</p>
+      </div>
+    </article>
+
+    <article class="prize">
+      <img
+        src="https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=700&q=80"
+        alt="Emas batangan"
+        loading="lazy">
+      <div class="prize-info">
+        <h3>🪙 Emas Batangan</h3>
+        <p>Hadiah emas pilihan</p>
+      </div>
+    </article>
+
+    <article class="prize">
+      <img
+        src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=80"
+        alt="Perhiasan emas"
+        loading="lazy">
+      <div class="prize-info">
+        <h3>💍 Perhiasan</h3>
+        <p>Hadiah perhiasan menarik</p>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="register" id="daftar">
+    <h2>🎁 Daftar Undian</h2>
+    <p>
+      Isi formulir pendaftaran berikut.
+      Data akan dikirim melalui layanan formulir
+      kepada pengelola.
+    </p>
+
+    <form
+      action="https://formsubmit.app/f/5gxrkba6jb"
+      method="POST">
+
+      <div class="field">
+        <label for="nama">Nama peserta</label>
+        <input
+          id="nama"
+          type="text"
+          name="nama"
+          maxlength="80"
+          autocomplete="name"
+          required>
+      </div>
+
+      <div class="field">
+        <label for="wa">Nomor WhatsApp</label>
+        <input
+          id="wa"
+          type="tel"
+          name="nomor_whatsapp"
+          placeholder="Contoh: 081234567890"
+          autocomplete="tel"
+          pattern="[0-9+() -]{9,20}"
+          required>
+      </div>
+
+      <div class="field">
+        <label for="alamat">Alamat pengiriman hadiah</label>
+        <textarea
+          id="alamat"
+          name="alamat_pengiriman"
+          placeholder="Alamat untuk pengiriman hadiah"
+          rows="4"
+          maxlength="300"
+          autocomplete="street-address"
+          required></textarea>
+      </div>
+
+      <label class="consent">
+        <input
+          type="checkbox"
+          name="persetujuan"
+          value="setuju"
+          required>
+        <span>
+          Saya memahami bahwa nama, nomor WhatsApp,
+          dan alamat saya akan diproses oleh pengelola
+          untuk pendaftaran undian dan pengiriman
+          hadiah jika saya menang.
+        </span>
+      </label>
+
+      <button type="submit">Daftar Undian →</button>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  🎁 Undian Berhadiah<br>
+  Pastikan informasi hadiah dan ketentuan undian
+  dijelaskan secara transparan kepada peserta.
+</footer>
+
+</body>
+  </html>
