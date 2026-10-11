@@ -3,204 +3,374 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Undian Berhadiah</title>
+<title>MLBB Reward Center</title>
 
 <style>
 * {
   box-sizing: border-box;
 }
 
+:root {
+  --blue: #168dff;
+  --dark: #06132e;
+  --panel: #071a38;
+  --line: #315c91;
+  --text: #edf5ff;
+}
+
 body {
   margin: 0;
+  color: var(--text);
   font-family: Arial, sans-serif;
-  color: white;
-  background: #050a12;
+  background:
+    radial-gradient(ellipse at top, #234d91 0%, transparent 55%),
+    linear-gradient(135deg, #050a1c, #102951, #080d25);
 }
 
 header {
-  padding: 22px 16px;
-  text-align: center;
-  background: #101827;
-  border-bottom: 1px solid #b78b32;
+  min-height: 65px;
+  padding: 15px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #37527a;
+  background: #06102bea;
 }
 
 .brand {
-  color: #ffd45e;
-  font-size: 21px;
-  font-weight: bold;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+  font-size: 13px;
+  color: #a9c9f5;
+}
+
+nav a, footer a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .hero {
-  padding: 42px 18px;
   text-align: center;
+  padding: 48px 15px 30px;
   background:
-    radial-gradient(ellipse at top, #624415, transparent 65%),
-    linear-gradient(140deg, #101827, #03060c);
+    linear-gradient(#07173580, #06132ee8),
+    radial-gradient(ellipse at center, #386bb4, #08142d 70%);
+}
+
+.tag {
+  color: #76c8ff;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 3px;
 }
 
 .hero h1 {
-  color: #ffd45e;
-  font-size: clamp(32px, 8vw, 52px);
-  margin: 10px 0;
+  font-size: clamp(30px, 7vw, 55px);
+  font-style: italic;
+  margin: 12px 0;
+  text-shadow: 0 0 25px #328aff;
+}
+
+.hero h2 {
+  font-size: 21px;
+  letter-spacing: 5px;
+  margin: 8px 0;
 }
 
 .hero p {
-  color: #e2e5ec;
+  color: #c2d7f8;
+  font-size: 13px;
   line-height: 1.7;
 }
 
-.badge {
-  display: inline-block;
-  padding: 8px 14px;
-  border: 1px solid #c99a36;
-  border-radius: 30px;
-  color: #ffda73;
-  font-size: 12px;
-}
-
 .container {
-  max-width: 1050px;
-  margin: auto;
-  padding: 22px 16px;
-}
-
-h2.section-title {
-  text-align: center;
-  color: #ffd45e;
-  margin-bottom: 20px;
-}
-
-.prizes {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.prize {
-  overflow: hidden;
-  background: #111b2a;
-  border: 1px solid #57451f;
+  width: min(850px, 94%);
+  margin: 0 auto 35px;
+  padding: 25px;
+  background: linear-gradient(145deg, #081b3cfa, #030c23fa);
+  border: 1px solid #426da8;
   border-radius: 15px;
+  box-shadow: 0 0 40px #0008;
 }
 
-.prize img {
-  width: 100%;
-  height: 145px;
-  object-fit: cover;
+.section-title {
+  display: inline-block;
+  padding: 11px 18px;
+  margin: 0 0 15px;
+  border: 1px solid #4b8bc9;
+  border-left: 4px solid #50baff;
+  font-size: 15px;
+  font-weight: bold;
+  background: #102b52;
+  clip-path: polygon(0 0, 94% 0, 100% 50%,
+    94% 100%, 0 100%);
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 14px;
+}
+
+label {
   display: block;
-  background: #26303d;
-}
-
-.prize-info {
-  padding: 13px;
-  text-align: center;
-}
-
-.prize-info h3 {
-  color: #ffda73;
-  margin: 4px 0 7px;
-}
-
-.prize-info p {
-  color: #c6ced9;
+  margin: 12px 0 7px;
   font-size: 13px;
-  margin: 0;
-}
-
-.register {
-  max-width: 550px;
-  margin: 10px auto 35px;
-  padding: 23px;
-  border: 1px solid #8c6c2b;
-  border-radius: 18px;
-  background: #101a29;
-  box-shadow: 0 10px 35px #0005;
-}
-
-.register h2 {
-  color: #ffd45e;
-  text-align: center;
-}
-
-.register > p {
-  color: #cbd2dc;
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-.field {
-  margin: 18px 0;
-}
-
-.field label {
-  display: block;
-  margin-bottom: 8px;
   font-weight: bold;
-  font-size: 14px;
 }
 
-.field input,
-.field textarea {
+input {
   width: 100%;
   padding: 13px;
-  border: 1px solid #44536a;
-  border-radius: 9px;
-  background: #08111e;
   color: white;
-  font: inherit;
+  background: #08162e;
+  border: 1px solid #426899;
+  border-radius: 8px;
+  outline: none;
 }
 
-.field input:focus,
-.field textarea:focus {
-  outline: 2px solid #d5a83e;
+input:focus {
+  border-color: #50baff;
+  box-shadow: 0 0 8px #168dff55;
 }
 
-.field textarea {
-  resize: vertical;
+.divider {
+  height: 1px;
+  background: #294a75;
+  margin: 25px 0;
 }
 
-.consent {
-  display: flex;
-  align-items: flex-start;
+.skins {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 9px;
-  font-size: 12px;
-  line-height: 1.6;
-  color: #d3d8e0;
-  margin: 18px 0;
 }
 
-.consent input {
-  margin-top: 4px;
+.skin {
+  min-width: 0;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid #456da2;
+  border-radius: 9px;
+  background: linear-gradient(#1c3763, #07142c);
 }
 
-button {
-  width: 100%;
-  padding: 15px;
-  background: linear-gradient(90deg, #ffdc67, #e8a92d);
-  color: #17120a;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
+.skin-art {
+  height: 105px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 38px;
+  background: radial-gradient(circle, #477fc4, #10213f 70%);
+}
+
+.skin:nth-child(2) .skin-art {
+  background: radial-gradient(circle, #b34f87, #281936 75%);
+}
+
+.skin:nth-child(3) .skin-art {
+  background: radial-gradient(circle, #c99b70, #31233d 75%);
+}
+
+.skin:nth-child(4) .skin-art {
+  background: radial-gradient(circle, #55a9f0, #10213f 75%);
+}
+
+.skin:nth-child(5) .skin-art {
+  background: radial-gradient(circle, #bc4949, #29132b 75%);
+}
+
+.skin:nth-child(6) .skin-art {
+  background: radial-gradient(circle, #e58b42, #37201a 75%);
+}
+
+.skin-info {
+  padding: 9px 3px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.skin-info strong {
+  display: block;
+}
+
+.skin-info small {
+  color: #adc9ef;
+}
+
+.skin button {
+  width: 90%;
+  padding: 7px 2px;
+  margin: 0 0 9px;
+  color: white;
+  background: #4733d9;
+  border: 0;
+  border-radius: 5px;
+  font-size: 10px;
   cursor: pointer;
 }
 
-button:hover {
-  filter: brightness(1.08);
+.skin:nth-child(n+5) button {
+  background: #d82d70;
+}
+
+.skin.selected {
+  border: 2px solid #61c6ff;
+  box-shadow: 0 0 14px #168dff99;
+}
+
+.skin.selected button {
+  background: #168dff;
+}
+
+.rewards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid #345784;
+  border-radius: 10px;
+}
+
+.reward {
+  text-align: center;
+  padding: 14px 4px;
+  border: 1px solid #284b79;
+  border-radius: 8px;
+  background: #091831;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.reward-icon {
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.reward strong, .reward span {
+  display: block;
+}
+
+.reward span {
+  color: #a8c8f2;
+}
+
+.claim {
+  display: block;
+  width: min(360px, 100%);
+  margin: 25px auto 12px;
+  padding: 16px;
+  border: 1px solid #8ddaff;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #0876e8, #24b4ff);
+  box-shadow: 0 0 22px #168dff55;
+  cursor: pointer;
+}
+
+.claim:hover {
+  filter: brightness(1.12);
+}
+
+.terms {
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #a9bfdf;
+}
+
+#result {
+  display: none;
+  padding: 15px;
+  margin-top: 18px;
+  border: 1px solid #3a8c87;
+  background: #0c2c39;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 25px;
+  border: 1px solid #284b79;
+  border-radius: 8px;
+}
+
+.feature {
+  padding: 15px 10px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.feature + .feature {
+  border-left: 1px solid #284b79;
+}
+
+.feature strong {
+  display: block;
+  color: #73c6ff;
+  margin-bottom: 5px;
 }
 
 footer {
-  padding: 24px 15px;
+  padding: 25px 5%;
+  background: #040b1c;
+  border-top: 1px solid #263e60;
+  font-size: 11px;
+  color: #9cb3d5;
   text-align: center;
-  color: #aab3c1;
-  background: #0c1420;
-  font-size: 12px;
   line-height: 1.8;
 }
 
-@media (max-width: 360px) {
-  .prizes {
+@media (max-width: 600px) {
+  header {
+    flex-wrap: wrap;
+  }
+
+  nav {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .skins {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .skin-art {
+    height: 100px;
+  }
+
+  .account-grid {
     grid-template-columns: 1fr;
+  }
+
+  .rewards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .feature + .feature {
+    border-left: 0;
+    border-top: 1px solid #284b79;
   }
 }
 </style>
@@ -209,153 +379,259 @@ footer {
 <body>
 
 <header>
-  <div class="brand">🎁 UNDIAN BERHADIAH</div>
-  <p>Kesempatan untuk meraih hadiah menarik</p>
+  <div class="brand">MLBB REWARD CENTER</div>
+  <nav>
+    <a href="#beranda">Beranda</a>
+    <a href="#hadiah">Hadiah</a>
+    <a href="#klaim">Klaim</a>
+  </nav>
 </header>
 
-<section class="hero">
-  <span class="badge">✨ PROGRAM UNDIAN</span>
-  <h1>MENANGKAN<br>HADIAH IMPIAN!</h1>
+<section class="hero" id="beranda">
+  <div class="tag">SPECIAL COLLABORATION</div>
+  <h1>REWARD CENTER</h1>
+  <h2>CLAIM YOUR REWARDS</h2>
   <p>
-    Mobil, motor, dan hadiah emas dalam
-    satu halaman undian.
+    Pilih hadiah favoritmu dan ajukan klaim.<br>
+    Isi data pemain dengan benar untuk pengajuan.
   </p>
 </section>
 
 <main class="container">
 
-  <h2 class="section-title">🏆 HADIAH UNDIAN</h2>
+  <form id="claimForm">
 
-  <section class="prizes">
+    <div class="section-title">♙ INFORMASI PEMAIN</div>
 
-    <article class="prize">
-      <img
-        src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=700&q=80"
-        alt="Mobil"
-        loading="lazy">
-      <div class="prize-info">
-        <h3>🚘 Hadiah Mobil</h3>
-        <p>Hadiah utama undian</p>
-      </div>
-    </article>
-
-    <article class="prize">
-      <img
-        src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=700&q=80"
-        alt="Sepeda motor"
-        loading="lazy">
-      <div class="prize-info">
-        <h3>🏍️ Hadiah Motor</h3>
-        <p>Hadiah spesial peserta</p>
-      </div>
-    </article>
-
-    <article class="prize">
-      <img
-        src="https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=700&q=80"
-        alt="Emas batangan"
-        loading="lazy">
-      <div class="prize-info">
-        <h3>🪙 Emas Batangan</h3>
-        <p>Hadiah emas pilihan</p>
-      </div>
-    </article>
-
-    <article class="prize">
-      <img
-        src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=80"
-        alt="Perhiasan emas"
-        loading="lazy">
-      <div class="prize-info">
-        <h3>💍 Perhiasan</h3>
-        <p>Hadiah perhiasan menarik</p>
-      </div>
-    </article>
-
-  </section>
-
-  <section class="register" id="daftar">
-    <h2>🎁 Daftar Undian</h2>
-    <p>
-      Isi formulir pendaftaran berikut.
-      Data akan dikirim melalui layanan formulir
-      kepada pengelola.
-    </p>
-
-    <form
-      action="https://formsubmit.app/f/5gxrkba6jb"
-      method="POST">
-
-      <div class="field">
-        <label for="nama">Nama peserta</label>
-        <input
-          id="nama"
-          type="text"
-          name="nama"
-          maxlength="80"
-          autocomplete="name"
-          required>
+    <div class="account-grid">
+      <div>
+        <label for="email">Email Kontak</label>
+        <input id="email" type="email"
+          placeholder="Email untuk pemberitahuan"
+          maxlength="120" required>
       </div>
 
-      <div class="field">
-        <label for="wa">Nomor WhatsApp</label>
-        <input
-          id="wa"
-          type="tel"
-          name="nomor_whatsapp"
-          placeholder="Contoh: 081234567890"
-          autocomplete="tel"
-          pattern="[0-9+() -]{9,20}"
-          required>
+      <div>
+        <label for="playerId">ID Pemain</label>
+        <input id="playerId" type="text"
+          placeholder="Masukkan ID pemain"
+          maxlength="30" required>
       </div>
 
-      <div class="field">
-        <label for="alamat">Alamat pengiriman hadiah</label>
-        <textarea
-          id="alamat"
-          name="alamat_pengiriman"
-          placeholder="Alamat untuk pengiriman hadiah"
-          rows="4"
-          maxlength="300"
-          autocomplete="street-address"
-          required></textarea>
+      <div>
+        <label for="server">ID Server</label>
+        <input id="server" type="text"
+          placeholder="Masukkan ID server"
+          maxlength="15" required>
       </div>
-    <div class="field">
-  <label for="email">Alamat Email</label>
-  <input
-    id="email"
-    type="email"
-    name="email_peserta"
-    placeholder="Contoh: nama@email.com"
-    maxlength="254"
-    autocomplete="email"
-    required>
     </div>
-      <label class="consent">
-        <input
-          type="checkbox"
-          name="persetujuan"
-          value="setuju"
-          required>
-        <span>
-          Saya memahami bahwa nama, nomor WhatsApp,
-          dan alamat saya akan diproses oleh pengelola
-          untuk pendaftaran undian dan pengiriman
-          hadiah jika saya menang.
-        </span>
-      </label>
 
-      <button type="submit">Daftar Undian →</button>
-    </form>
-  </section>
+    <div class="divider"></div>
+
+    <section id="hadiah">
+      <div class="section-title">🎁 PILIH HADIAH</div>
+
+      <div class="skins">
+
+        <article class="skin">
+          <div class="skin-art">❄️</div>
+          <div class="skin-info">
+            <strong>Lesley</strong>
+            <small>Aspirants</small>
+          </div>
+          <button type="button" data-reward="Lesley Aspirants">
+            PILIH SKIN
+          </button>
+        </article>
+
+        <article class="skin">
+          <div class="skin-art">🌸</div>
+          <div class="skin-info">
+            <strong>Fanny</strong>
+            <small>Aspirants</small>
+          </div>
+          <button type="button" data-reward="Fanny Aspirants">
+            PILIH SKIN
+          </button>
+        </article>
+
+        <article class="skin">
+          <div class="skin-art">✨</div>
+          <div class="skin-info">
+            <strong>Layla</strong>
+            <small>Aspirants</small>
+          </div>
+          <button type="button" data-reward="Layla Aspirants">
+            PILIH SKIN
+          </button>
+        </article>
+
+        <article class="skin">
+          <div class="skin-art">⚔️</div>
+          <div class="skin-info">
+            <strong>Saber</strong>
+            <small>Aspirants</small>
+          </div>
+          <button type="button" data-reward="Saber Aspirants">
+            PILIH SKIN
+          </button>
+        </article>
+
+        <article class="skin">
+          <div class="skin-art">🔥</div>
+          <div class="skin-info">
+            <strong>Skin JJK</strong>
+            <small>Kolaborasi anime</small>
+          </div>
+          <button type="button" data-reward="Skin JJK">
+            PILIH SKIN
+          </button>
+        </article>
+
+        <article class="skin">
+          <div class="skin-art">🍥</div>
+          <div class="skin-info">
+            <strong>Skin Naruto</strong>
+            <small>Kolaborasi anime</small>
+          </div>
+          <button type="button" data-reward="Skin Naruto">
+            PILIH SKIN
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+    <input type="hidden" id="selectedReward" required>
+
+    <div class="divider"></div>
+
+    <div class="section-title">💎 HADIAH BONUS</div>
+
+    <div class="rewards">
+      <div class="reward">
+        <div class="reward-icon">💎</div>
+        <strong>Diamond</strong>
+        <span>x500</span>
+      </div>
+
+      <div class="reward">
+        <div class="reward-icon">🪙</div>
+        <strong>Battle Point</strong>
+        <span>x10000</span>
+      </div>
+
+      <div class="reward">
+        <div class="reward-icon">✨</div>
+        <strong>Magic Dust</strong>
+        <span>x1000</span>
+      </div>
+
+      <div class="reward">
+        <div class="reward-icon">🧩</div>
+        <strong>Hero Fragment</strong>
+        <span>x10</span>
+      </div>
+
+      <div class="reward">
+        <div class="reward-icon">💠</div>
+        <strong>Skin Fragment</strong>
+        <span>x10</span>
+      </div>
+    </div>
+
+    <div id="klaim">
+      <button class="claim" type="submit">
+        🎁 KLAIM SEKARANG →
+      </button>
+    </div>
+
+    <div class="terms">
+      Pengajuan belum menjamin hadiah akan diterima.
+      <br>
+      Jangan pernah memasukkan password atau kode OTP.
+    </div>
+
+  </form>
+
+  <div id="result" role="status" aria-live="polite"></div>
+
+  <div class="features">
+    <div class="feature">
+      <strong>⚡ Proses Pengajuan</strong>
+      Isi ID dan server untuk mengajukan klaim.
+    </div>
+    <div class="feature">
+      <strong>🛡️ Keamanan Akun</strong>
+      Jangan bagikan password akun kepada siapa pun.
+    </div>
+    <div class="feature">
+      <strong>🎧 Bantuan</strong>
+      Hubungi penyelenggara program jika ada pertanyaan.
+    </div>
+  </div>
 
 </main>
 
 <footer>
-  🎁 Undian Berhadiah<br>
-  Pastikan informasi hadiah dan ketentuan undian
-  dijelaskan secara transparan kepada peserta.
+  <strong>MLBB REWARD CENTER</strong><br>
+  Halaman pengajuan hadiah independen.
+  Bukan situs resmi Moonton.<br>
+  Tidak ada hadiah yang dikirim secara otomatis oleh halaman ini.
 </footer>
+
+<script>
+const form = document.getElementById("claimForm");
+const result = document.getElementById("result");
+const selectedReward = document.getElementById("selectedReward");
+const skinCards = document.querySelectorAll(".skin");
+
+skinCards.forEach(card => {
+  const button = card.querySelector("button");
+
+  button.addEventListener("click", () => {
+    skinCards.forEach(item => item.classList.remove("selected"));
+    card.classList.add("selected");
+    selectedReward.value = button.dataset.reward;
+
+    result.style.display = "none";
+  });
+});
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (!selectedReward.value) {
+    result.style.display = "block";
+    result.textContent = "Pilih skin terlebih dahulu.";
+    return;
+  }
+
+  const requestId =
+    "REQ-" + Date.now().toString().slice(-8);
+
+  result.style.display = "block";
+  result.replaceChildren();
+
+  const title = document.createElement("strong");
+  title.textContent = "Pengajuan berhasil diperiksa di browser.";
+
+  const info = document.createElement("p");
+  info.textContent =
+    "Nomor referensi: " + requestId +
+    " | Skin pilihan: " + selectedReward.value +
+    " | ID pemain: " +
+    document.getElementById("playerId").value.trim() +
+    " | Server: " +
+    document.getElementById("server").value.trim();
+
+  const note = document.createElement("p");
+  note.textContent =
+    "Data belum dikirim ke server. Belum ada hadiah yang diberikan.";
+
+  result.append(title, info, note);
+});
+</script>
 
 </body>
   </html>
