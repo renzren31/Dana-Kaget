@@ -1,136 +1,44 @@
+<form
+  action="https://formsubmit.app/f/5gxrkba6jb"
+  method="POST">
 
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undian Berhadiah</title>
+  <h2>🎁 Undian Berhadiah</h2>
+  <p>
+    Isi data berikut untuk mendaftar undian.
+    Nama dan nomor WhatsApp akan dikirim ke
+    pengelola melalui layanan formulir.
+  </p>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #075e54, #25d366);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 28px;
-      border-radius: 18px;
-      width: 100%;
-      max-width: 380px;
-      text-align: center;
-      box-shadow: 0 10px 30px #0002;
-    }
-
-    .emoji {
-      font-size: 55px;
-    }
-
-    h1 {
-      color: #075e54;
-      font-size: 26px;
-    }
-
-    p {
-      color: #555;
-      line-height: 1.5;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      margin: 12px 0;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 16px;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      background: #128c7e;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #075e54;
-    }
-
-    #hasil {
-      margin-top: 18px;
-      font-weight: bold;
-    }
-
-    .privacy {
-      font-size: 12px;
-      color: #777;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="card">
-    <div class="emoji">🎁</div>
-
-    <h1>Undian Berhadiah</h1>
-
-    <p>
-      Daftarkan nomor WhatsApp kamu untuk
-      mengikuti undian berhadiah!
-    </p>
-
-    <form id="formUndian">
-      <input
-        type="tel"
-        id="nomor"
-        placeholder="Contoh: 081234567890"
-        autocomplete="tel"
-        required
-        pattern="[0-9+() -]{9,20}"
-        aria-label="Nomor WhatsApp"
-      >
-
-      <p class="privacy">
-        Nomor digunakan untuk keperluan pendaftaran
-        undian. Jangan masukkan kode OTP atau PIN.
-      </p>
-
-      <button type="submit">Daftar Undian</button>
-    </form>
-
-    <div id="hasil" role="status"></div>
+  <div>
+    <label for="nama">Nama peserta</label>
+    <input
+      id="nama"
+      type="text"
+      name="nama"
+      maxlength="80"
+      required>
   </div>
 
-  <script>
-    document.getElementById("formUndian")
-      .addEventListener("submit", function(event) {
-        event.preventDefault();
+  <div>
+    <label for="wa">Nomor WhatsApp</label>
+    <input
+      id="wa"
+      type="tel"
+      name="nomor_whatsapp"
+      placeholder="Contoh: 081234567890"
+      pattern="[0-9+() -]{9,20}"
+      required>
+  </div>
 
-        const nomor = document.getElementById("nomor")
-          .value.trim();
+  <label>
+    <input
+      type="checkbox"
+      name="persetujuan"
+      value="setuju"
+      required>
+    Saya setuju data pendaftaran saya dikirim
+    kepada pengelola untuk keperluan undian.
+  </label>
 
-        if (!nomor) return;
-
-        document.getElementById("hasil").textContent =
-          "Pendaftaran berhasil dicatat di halaman ini!";
-
-        this.reset();
-      });
-  </script>
-</body>
-</html>
+  <button type="submit">Daftar Undian</button>
+</form>
