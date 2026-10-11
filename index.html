@@ -1,55 +1,136 @@
 
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DANA Kaget</title>
-<style>
-body {
-  background: #0878e8;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 40px 15px;
-}
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 15px;
-  max-width: 350px;
-  margin: auto;
-}
-a {
-  display: block;
-  background: #0878e8;
-  color: white;
-  padding: 16px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-}
-#hasil {
-  display: none;
-  margin-top: 20px;
-  color: #b42318;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undian Berhadiah</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #075e54, #25d366);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 10px 30px #0002;
+    }
+
+    .emoji {
+      font-size: 55px;
+    }
+
+    h1 {
+      color: #075e54;
+      font-size: 26px;
+    }
+
+    p {
+      color: #555;
+      line-height: 1.5;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #128c7e;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #075e54;
+    }
+
+    #hasil {
+      margin-top: 18px;
+      font-weight: bold;
+    }
+
+    .privacy {
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
 </head>
+
 <body>
-<div class="card">
-  <h2>🎁 DANA Kaget</h2>
-  <p>Kamu mendapatkan kejutan!</p>
-  <a href="#" onclick="
-    document.getElementById('hasil').style.display='block';
-    return false;">
-    BUKA HADIAH
-  </a>
-  <div id="hasil">
-    <h3>⚠️ PRANK!!</h3>
-    <p>Jangan mudah percaya hadiah dari tautan yang tidak dikenal.</p>
-    <p>Jangan pernah memberikan PIN atau OTP.</p>
+  <div class="card">
+    <div class="emoji">🎁</div>
+
+    <h1>Undian Berhadiah</h1>
+
+    <p>
+      Daftarkan nomor WhatsApp kamu untuk
+      mengikuti undian berhadiah!
+    </p>
+
+    <form id="formUndian">
+      <input
+        type="tel"
+        id="nomor"
+        placeholder="Contoh: 081234567890"
+        autocomplete="tel"
+        required
+        pattern="[0-9+() -]{9,20}"
+        aria-label="Nomor WhatsApp"
+      >
+
+      <p class="privacy">
+        Nomor digunakan untuk keperluan pendaftaran
+        undian. Jangan masukkan kode OTP atau PIN.
+      </p>
+
+      <button type="submit">Daftar Undian</button>
+    </form>
+
+    <div id="hasil" role="status"></div>
   </div>
-</div>
+
+  <script>
+    document.getElementById("formUndian")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const nomor = document.getElementById("nomor")
+          .value.trim();
+
+        if (!nomor) return;
+
+        document.getElementById("hasil").textContent =
+          "Pendaftaran berhasil dicatat di halaman ini!";
+
+        this.reset();
+      });
+  </script>
 </body>
 </html>
